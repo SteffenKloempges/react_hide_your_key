@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import key from './Key.json'
 
 function App() {
+  const [data, setData] = useState([]);
+
+  console.log(key)
+  const fetchData = () => {
+    fetch(`https://newsapi.org/v2/everything?q=tesla&from=2022-11-05&sortBy=publishedAt&apiKey=${key[0].key}`)
+      .then(response => response.json())
+      .then(json => setData(json))
+  }
+
+  useEffect(fetchData, [])
+
+  console.log(data)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Guten Morgen Sonnenschein {'<3'}</h1>
     </div>
   );
 }
